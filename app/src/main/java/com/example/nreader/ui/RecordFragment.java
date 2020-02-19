@@ -39,8 +39,8 @@ public class RecordFragment extends Fragment {
         ArrayList<String> names = SharedPreferencesUtil.getArray(SharedPreferencesUtil.KEY_NAMES);
         RadioGroup radioGroup = root.findViewById(R.id.rgp_names);
         Common.initRadioGroup(root, names, radioGroup);
-        initModifyButton(root, names, R.id.btn_record_new, names.size());
-        initModifyButton(root, names, R.id.btn_record_modify, radioGroup.getCheckedRadioButtonId());
+        initModifyButton(root, names, R.id.btn_record_new, null);
+        initModifyButton(root, names, R.id.btn_record_modify, radioGroup);
         initDeleteButton(root, names, radioGroup);
     }
 
@@ -77,10 +77,13 @@ public class RecordFragment extends Fragment {
         });
     }
 
-    private void initModifyButton(View root, final ArrayList<String> names, int id, final int index) {
+    private void initModifyButton(View root, final ArrayList<String> names, int id, final RadioGroup radioGroup) {
         root.findViewById(id).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int index = names.size();
+                if (radioGroup != null)
+                    index = radioGroup.getCheckedRadioButtonId();
                 showRecordDialogFragment(names, index);
             }
         });
