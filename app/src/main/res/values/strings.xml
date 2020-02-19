@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">NReader</string>
+    <string name="title_read">请输入需要发音的数字</string>
+    <string name="hint_number">请输入</string>
+    <string name="text_read_number_length">输入数字长度：</string>
+    <string name="title_record">新建或修改录音</string>
+    <string name="menu_read">读数字</string>
+    <string name="menu_record">录数字</string>
+    <string name="btn_new">新建</string>
+    <string name="btn_modify">修改</string>
+    <string name="btn_delete">删除</string>
+    <string name="text_record_input_name">请输入姓名：</string>
+    <string name="text_record_default_name">路人甲</string>
+    <string name="text_record_click_button">请长按对应数字进行录音:</string>
+    <string name="btn_save">保存</string>
+    <string name="btn_play">播放全部</string>
+    <string name="btn_cancel">取消</string>
+    <string name="btn_confirm">确认</string>
+    <string name="text_confirm_delete">请确认是否删除</string>
+    <string name="hint_duplicated_name">姓名重复，请重新输入</string>
+</resources>
