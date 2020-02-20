@@ -11,6 +11,7 @@ public class Common {
 
     public static void initRadioGroup(View root, List<String> array, RadioGroup radioGroup) {
         radioGroup.removeAllViews();
+        radioGroup.clearCheck();
         if (!array.isEmpty()) {
             int id = 0;
             for (String s : array) {
@@ -21,7 +22,6 @@ public class Common {
                 //btn.setGravity(Gravity.CENTER);
                 radioGroup.addView(btn);
             }
-            radioGroup.clearCheck();
             radioGroup.check(0);
         }
     }

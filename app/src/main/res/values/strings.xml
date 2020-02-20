@@ -3,6 +3,9 @@
     <string name="title_read">请输入需要发音的数字</string>
     <string name="hint_number">请输入</string>
     <string name="text_read_number_length">输入数字长度：</string>
+    <string name="text_default_number_length">4</string>
+    <string name="text_choose_name">请选择需要发音的声源：</string>
+    <string name="text_no_name">当前无可选声源，请先为数字录音</string>
     <string name="title_record">新建或修改录音</string>
     <string name="menu_read">读数字</string>
     <string name="menu_record">录数字</string>

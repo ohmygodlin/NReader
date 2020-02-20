@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -38,7 +39,11 @@ public class ReadFragment extends Fragment {
         //init RadioGroup
         ArrayList<String> names = SharedPreferencesUtil.getArray(SharedPreferencesUtil.KEY_NAMES);
         RadioGroup radioGroup = root.findViewById(R.id.rgp_names);
-        Common.initRadioGroup(root, names, radioGroup);
+        if (names.isEmpty()) {
+            TextView txt = root.findViewById(R.id.txt_choose_name);
+            txt.setText(R.string.text_no_name);
+        } else
+            Common.initRadioGroup(root, names, radioGroup);
         initLengthEdit(root);
         initNumbersEdit(root, radioGroup);
     }
@@ -61,7 +66,7 @@ public class ReadFragment extends Fragment {
                     //play
                     Context context = root.getContext();
                     int index = radioGroup.getCheckedRadioButtonId();
-                    final File dir = new File(context.getFilesDir(), Integer.toString(index));
+                    File dir = new File(context.getFilesDir(), Integer.toString(index));
                     List<String> array = new ArrayList<>();
                     for (int i = 0; i < len; i++)
                         array.add(String.valueOf(s.charAt(i)));

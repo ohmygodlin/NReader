@@ -34,7 +34,7 @@ public class RecordFragment extends Fragment {
         return root;
     }
 
-    protected void initView(View root) {
+    private void initView(View root) {
         //init RadioGroup
         ArrayList<String> names = SharedPreferencesUtil.getArray(SharedPreferencesUtil.KEY_NAMES);
         RadioGroup radioGroup = root.findViewById(R.id.rgp_names);
@@ -82,8 +82,11 @@ public class RecordFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int index = names.size();
-                if (radioGroup != null)
+                if (radioGroup != null) {
                     index = radioGroup.getCheckedRadioButtonId();
+                    if (index < 0)
+                        return;
+                }
                 showRecordDialogFragment(names, index);
             }
         });
@@ -105,8 +108,8 @@ public class RecordFragment extends Fragment {
         if (requestCode == RecordDialogFragment.DIALOG_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 View root = getView();
-                final ArrayList<String> names = SharedPreferencesUtil.getArray(SharedPreferencesUtil.KEY_NAMES);
-                final RadioGroup radioGroup = root.findViewById(R.id.rgp_names);
+                ArrayList<String> names = SharedPreferencesUtil.getArray(SharedPreferencesUtil.KEY_NAMES);
+                RadioGroup radioGroup = root.findViewById(R.id.rgp_names);
                 Common.initRadioGroup(root, names, radioGroup);
             }
         }
