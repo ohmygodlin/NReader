@@ -19,6 +19,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.nreader.R;
 import com.example.nreader.util.AudioRecorder;
+import com.example.nreader.util.Common;
 import com.example.nreader.util.FileUtil;
 import com.example.nreader.util.MediaPlayerHelper;
 import com.example.nreader.util.SharedPreferencesUtil;
@@ -61,7 +62,7 @@ public class RecordDialogFragment extends DialogFragment {
         }
         Context context = root.getContext();
         // create dir
-        File dir = new File(context.getFilesDir(), Integer.toString(index));
+        File dir = new File(Common.BASE_DIR, Integer.toString(index));
         if (!dir.exists())
             dir.mkdirs();
         initRecordButtons(root, dir, context.getPackageName());

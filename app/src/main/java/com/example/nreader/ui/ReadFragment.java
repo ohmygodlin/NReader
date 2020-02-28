@@ -1,9 +1,7 @@
 package com.example.nreader.ui;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +28,7 @@ public class ReadFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         Log.d("ReadFragment", "onCreateView called");
+        Log.d("StoragePublicDirectory", Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).toString());
         View root = inflater.inflate(R.layout.fragment_read, container, false);
         initView(root);
         return root;
@@ -44,55 +43,24 @@ public class ReadFragment extends Fragment {
             txt.setText(R.string.text_no_name);
         } else
             Common.initRadioGroup(root, names, radioGroup);
-        initLengthEdit(root);
-        initNumbersEdit(root, radioGroup);
+        initReadButton(root, radioGroup);
     }
 
-    private void initNumbersEdit(final View root, final RadioGroup radioGroup) {
-        final EditText edtNumbers = root.findViewById(R.id.edt_numbers);
-        final EditText edtLength = root.findViewById(R.id.edt_length);
-        edtNumbers.addTextChangedListener(new TextWatcher() {
+    private void initReadButton(final View root, final RadioGroup radioGroup) {
+        root.findViewById(R.id.btn_read_number).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                int max = Integer.parseInt(edtLength.getText().toString());
-                int len = s.length();
-                if (len == max){
-                    //play
-                    Context context = root.getContext();
-                    int index = radioGroup.getCheckedRadioButtonId();
-                    File dir = new File(context.getFilesDir(), Integer.toString(index));
-                    List<String> array = new ArrayList<>();
-                    for (int i = 0; i < len; i++)
-                        array.add(String.valueOf(s.charAt(i)));
-                    MediaPlayerHelper.getInstance().play(dir, array);
-                } else if (len > max) {
-                    //left only new input
-                    edtNumbers.removeTextChangedListener(this);
-                    edtNumbers.setText(String.valueOf(s.charAt(len - 1)));
-                    edtNumbers.addTextChangedListener(this);
-                    edtNumbers.setSelection(1);
-                }
-            }
-        });
-    }
-
-    private void initLengthEdit(View root) {
-        final EditText edtLength = root.findViewById(R.id.edt_length);
-        int length = SharedPreferencesUtil.getInt(SharedPreferencesUtil.KEY_NUMBER_LENGTH, DEFAULT_NUMBER_LENGTH);
-        edtLength.setText(Integer.toString(length));
-        edtLength.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    int length = Integer.parseInt(edtLength.getText().toString());
-                    SharedPreferencesUtil.putInt(SharedPreferencesUtil.KEY_NUMBER_LENGTH, length);
-                }
+            public void onClick(View v) {
+                //play
+                int index = radioGroup.getCheckedRadioButtonId();
+                File dir = new File(Common.BASE_DIR, Integer.toString(index));
+                if (!dir.exists())
+                    return;
+                EditText edtNumbers = root.findViewById(R.id.edt_numbers);
+                char[] chars = edtNumbers.getText().toString().toCharArray();
+                List<String> array = new ArrayList<>();
+                for (char c : chars)
+                    array.add(String.valueOf(c));
+                MediaPlayerHelper.getInstance().play(dir, array);
             }
         });
     }

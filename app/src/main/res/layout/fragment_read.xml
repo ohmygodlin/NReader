@@ -9,33 +9,17 @@
         android:id="@+id/edt_numbers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/hint_number"
+        android:hint="@string/hint_input_number"
         android:inputType="number"
+        android:maxLength="8"
         android:textSize="50sp" />
 
-    <LinearLayout
+    <Button
+        android:id="@+id/btn_read_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:text="@string/text_read_number_length"
-            android:textSize="30sp" />
-
-        <EditText
-            android:id="@+id/edt_length"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="number"
-            android:text="@string/text_default_number_length"
-            android:textSize="30sp" />
-    </LinearLayout>
+        android:text="@string/btn_read_number"
+        android:textSize="36sp" />
 
     <TextView
         android:id="@+id/txt_choose_name"

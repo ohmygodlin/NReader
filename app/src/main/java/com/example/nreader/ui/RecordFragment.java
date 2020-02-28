@@ -49,7 +49,7 @@ public class RecordFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 final int id = radioGroup.getCheckedRadioButtonId();
-                if (id < 0)
+                if (id <= 0)
                     return;
                 //show Alertdialog
                 final Context context = root.getContext();
@@ -58,7 +58,7 @@ public class RecordFragment extends Fragment {
                 builder.setPositiveButton(R.string.btn_confirm, new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        File parent = context.getFilesDir();
+                        File parent = Common.BASE_DIR;
                         File dst = new File(parent, Integer.toString(id));
                         FileUtil.deleteDir(dst);
                         for (int i = id + 1; i < names.size(); i++){
@@ -84,7 +84,7 @@ public class RecordFragment extends Fragment {
                 int index = names.size();
                 if (radioGroup != null) {
                     index = radioGroup.getCheckedRadioButtonId();
-                    if (index < 0)
+                    if (index <= 0)
                         return;
                 }
                 showRecordDialogFragment(names, index);

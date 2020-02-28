@@ -46,16 +46,16 @@ public class SharedPreferencesUtil {
         return ret;
     }
 
-    public static boolean putInt(String key, int value) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Log.i("SharedPreferencesUtil", String.format("putInt: %d", value));
-        editor.putInt(key, value);
-        return editor.commit();
-    }
-
-    public static int getInt(String key, int defValue) {
-        int value = sharedPreferences.getInt(key, defValue);
-        Log.i("SharedPreferencesUtil", String.format("getInt: %d", value));
-        return value;
-    }
+//    public static boolean putInt(String key, int value) {
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        Log.i("SharedPreferencesUtil", String.format("putInt: %d", value));
+//        editor.putInt(key, value);
+//        return editor.commit();
+//    }
+//
+//    public static int getInt(String key, int defValue) {
+//        int value = sharedPreferences.getInt(key, defValue);
+//        Log.i("SharedPreferencesUtil", String.format("getInt: %d", value));
+//        return value;
+//    }
 }

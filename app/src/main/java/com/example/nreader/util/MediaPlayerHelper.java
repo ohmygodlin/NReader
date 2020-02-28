@@ -45,11 +45,13 @@ public class MediaPlayerHelper {
         if (isPlaying)
             return;
         Log.d("play_dir", dir.toString());
+        String last = null;
         if (array == null) {
             //play all files under the dir
             for (File f : dir.listFiles()) {
                 String s = f.getAbsolutePath();
                 if (s.endsWith(Common.SUFFIX_WAV)) {
+                    last = f.toString();
                     recordQueue.offer(s);
                     Log.d("play_add", s);
                 }
@@ -61,8 +63,17 @@ public class MediaPlayerHelper {
                 File f = new File(dir, s);
                 if (!f.exists())
                     continue;
-                Log.d("play_add", s);
+                last = s;
                 recordQueue.offer(f.getAbsolutePath());
+                Log.d("play_add", s);
+            }
+        }
+        if (last != null) {
+            File f = new File(Common.BASE_DIR, last);
+            if (f.exists()) {
+                String s = f.getAbsolutePath();
+                recordQueue.offer(s);
+                Log.d("play_add", s);
             }
         }
         isPlaying = true;
